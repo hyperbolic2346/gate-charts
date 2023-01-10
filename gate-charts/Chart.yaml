@@ -1,4 +1,4 @@
-name: gate_chart
+name: gate-charts
 version: 0.2
 description: Gate db, motion detection, website
 keywords:
