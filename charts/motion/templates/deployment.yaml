@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "motion.fullname" . }}
+  labels:
+    app: {{ template "motion.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "motion.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "motion.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "motion.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        ports:
+        - name: motion
+          containerPort: {{ default "9081" .Values.motionNodePort }}
+        volumeMounts:
+        - name: security-camera-storage
+          mountPath: /fileserv/security_camera
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: security-camera-storage
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default (include "celery.fullname" .) }}
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "celery.fullname" . }}
+  labels:
+    app: {{ template "celery.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: {{ template "celery.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "celery.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "celery.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        - name: RABBIT_PW
+          valueFrom:
+            secretKeyRef:
+              name: gate-rabbitmq
+              key: rabbitmq-password
+        ports:
+        - name: celery
+          containerPort: {{ default "5672" .Values.celeryNodePort | add 20000 }}
+        volumeMounts:
+        - name: security-camera-storage
+          mountPath: /fileserv/security_camera
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: security-camera-storage
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim | default (include "celery.fullname" .) }}
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}

@@ -1,0 +1,9 @@
+celery:
+  image: celery_motion:latest
+
+gate:
+  image: gate:latest
+
+motion:
+  image: motion:latest
+  motionNodePort: 9081

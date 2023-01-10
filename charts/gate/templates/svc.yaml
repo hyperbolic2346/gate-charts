@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "gate.fullname" . }}
+  labels:
+    app: {{ template "gate.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+
+spec:
+  type: {{ .Values.serviceType }}
+#  externalTrafficPolicy: {{ .Values.externalTrafficPolicy }}
+  ports:
+  - name: gate
+    port: 80
+    targetPort: gate
+  selector:
+    app: {{ template "gate.fullname" . }}

@@ -1,0 +1,16 @@
+## Gate
+##
+
+image: gate:latest
+persistence:
+  existingClaim: gate
+  securityClaim: security-camera
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+
+externalTrafficPolicy: Local
+
+cluster-issuer: letsencrypt-prod

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "gate.fullname" . }}
+  labels:
+    app: {{ template "gate.fullname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "gate.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "gate.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "gate.fullname" . }}
+        image: "{{ .Values.image }}"
+        imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        ports:
+        - name: gate
+          containerPort: 80
+        volumeMounts:
+        - name: gate
+          mountPath: /var/www
+        - name: security-camera
+          mountPath: /var/www/html/media
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+      volumes:
+      - name: gate
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.existingClaim }}
+      - name: security-camera
+        persistentVolumeClaim:
+          claimName: {{ .Values.persistence.securityClaim }}

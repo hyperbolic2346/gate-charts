@@ -1,0 +1,15 @@
+name: gate_chart
+version: 0.2
+description: Gate db, motion detection, website
+keywords:
+- gate
+- application
+maintainers:
+- name: Mike Wilson
+  email: knobby@burntsheep.com
+engine: gotpl
+dependencies:
+- name: rabbitmq
+  version: 7.6.x
+  repository: https://charts.bitnami.com/bitnami
+  

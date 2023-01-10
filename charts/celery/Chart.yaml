@@ -1,0 +1,13 @@
+appVersion: 1.0.0
+description: Celery app to encode videos created by motion
+engine: gotpl
+home: https://www.burntsheep.com
+keywords:
+- rabbitmq
+- celery
+- motion
+maintainers:
+- email: knobby@burntsheep.com
+  name: Mike Wilson
+name: celery
+version: 0.0.1

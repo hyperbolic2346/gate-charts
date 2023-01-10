@@ -1,0 +1,11 @@
+appVersion: 1.0.0
+description: Motion detection app
+engine: gotpl
+home: https://www.burntsheep.com
+keywords:
+- motion
+maintainers:
+- email: knobby@burntsheep.com
+  name: Mike Wilson
+name: motion
+version: 0.0.1
