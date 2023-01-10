@@ -13,4 +13,4 @@ resources:
 
 externalTrafficPolicy: Local
 
-cluster-issuer: letsencrypt-prod
+clusterissuer: letsencrypt-prod
