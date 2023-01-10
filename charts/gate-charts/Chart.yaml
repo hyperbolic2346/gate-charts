@@ -10,6 +10,6 @@ maintainers:
 engine: gotpl
 dependencies:
 - name: rabbitmq
-  version: 7.6.x
+  version: 11.3.x
   repository: https://charts.bitnami.com/bitnami
   
