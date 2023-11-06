@@ -5,9 +5,9 @@ metadata:
   annotations:
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: {{ .Values.clusterissuer }}
-    ingressClassName: {{ .Values.ingressClassName }}
     kubernetes.io/ingress.class: {{ .Values.ingressClass }}
 spec:
+  ingressClassName: {{ .Values.ingressClassName }}
   tls:
   - hosts:
     - {{ .Values.hostname }}
