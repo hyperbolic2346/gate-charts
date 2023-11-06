@@ -14,3 +14,5 @@ resources:
 externalTrafficPolicy: Local
 
 clusterissuer: letsencrypt-prod
+ingressClassName: ""
+ingressClass: nginx
