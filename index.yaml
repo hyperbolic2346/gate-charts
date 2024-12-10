@@ -2,6 +2,20 @@ apiVersion: v1
 entries:
   gate-charts:
   - apiVersion: v1
+    created: "2024-12-10T04:49:19.2545876Z"
+    description: Gate db, motion detection, website
+    digest: 5e1795da1c7cd5c70b923ad90b66eec47a4d90f4896329eeef7266c70708e492
+    keywords:
+    - gate
+    - application
+    maintainers:
+    - email: knobby@burntsheep.com
+      name: Mike Wilson
+    name: gate-charts
+    urls:
+    - https://github.com/hyperbolic2346/gate-charts/releases/download/gate-charts-0.7/gate-charts-0.7.tgz
+    version: "0.7"
+  - apiVersion: v1
     created: "2024-12-10T03:04:18.946837791Z"
     description: Gate db, motion detection, website
     digest: 9d571658d7790a3b73e6c5cf054fa2abf7acf21c03831e1bd4a1a2a3369f8762
@@ -71,4 +85,4 @@ entries:
     urls:
     - https://github.com/hyperbolic2346/gate-charts/releases/download/gate-charts-0.2/gate-charts-0.2.tgz
     version: "0.2"
-generated: "2024-12-10T03:04:18.946861415Z"
+generated: "2024-12-10T04:49:19.254605794Z"
