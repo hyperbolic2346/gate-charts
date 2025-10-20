@@ -25,8 +25,8 @@ spec:
         - name: RABBIT_PW
           valueFrom:
             secretKeyRef:
-              name: gate-rabbitmq
-              key: rabbitmq-password
+              name: gate-rabbitmq-default-user
+              key: password
         ports:
         - name: celery
           containerPort: {{ default "5672" .Values.celeryNodePort | add 20000 }}
