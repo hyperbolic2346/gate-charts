@@ -21,6 +21,12 @@ spec:
       - name: {{ template "motion.fullname" . }}
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
+        env:
+        - name: RABBIT_PW
+          valueFrom:
+            secretKeyRef:
+              name: gate-rabbitmq-default-user
+              key: password
         ports:
         - name: motion
           containerPort: {{ default "9081" .Values.motionNodePort }}
