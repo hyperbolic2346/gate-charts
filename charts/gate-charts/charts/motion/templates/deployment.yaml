@@ -22,6 +22,11 @@ spec:
         image: "{{ .Values.image }}"
         imagePullPolicy: {{ default "" .Values.imagePullPolicy | quote }}
         env:
+        - name: RABBIT_USER
+          valueFrom:
+            secretKeyRef:
+              name: gate-rabbitmq-default-user
+              key: username
         - name: RABBIT_PW
           valueFrom:
             secretKeyRef:
